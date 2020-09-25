@@ -1,0 +1,19 @@
+name: "Template HelmRelease"
+description: "Templates one or more Flux CD HelmRelease resources."
+branding:
+  icon: "anchor"
+  color: "blue"
+inputs: 
+  hr-path:
+    description: "Path to the HelmRelease file or directory"
+    required: true
+  out-dir:
+    description: "Path to the directory to write the outputs."
+    required: true
+    default: '.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ input.hr-path }}
+    - ${{ input.out-dir }}
