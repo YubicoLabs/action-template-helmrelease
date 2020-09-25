@@ -15,5 +15,5 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ input.hr-path }}
-    - ${{ input.out-dir }}
+    - ${{ inputs.hr-path }}
+    - ${{ inputs.out-dir }}

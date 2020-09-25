@@ -15,7 +15,7 @@ if [ -z "${HR_PATH}" ]; then
 fi
 
 if [ -z "${OUT_DIR}" ]; then
-    echo "Error! No output file specified."
+    echo "Error! No output directory specified."
     usage
 fi
 
