@@ -1,0 +1,13 @@
+name: Pull Request
+on: [pull_request]
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: run flake8
+      run: |
+        pip3 install --user flake8
+        flake8
