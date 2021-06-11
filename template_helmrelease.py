@@ -28,6 +28,8 @@ def get_releases(path: str) -> None:
                     continue
                 if 'kind' not in yaml_parsed.keys():
                     continue
+
+                yaml_parsed['original_file_path'] = file
                 if yaml_parsed['kind'] == 'HelmRelease':
                     helm_releases.append(yaml_parsed)
                 if yaml_parsed['kind'] == 'HelmRepository':
@@ -116,15 +118,8 @@ def helm_template(cfg: dict) -> None:
 
 if __name__ == '__main__':
     check_args()
-    try:
-        mkdir(argv[2])
-    except FileExistsError:
-        pass
-    except Exception as e:
-        print('Error! Unable to create output directory')
-        print(e)
-        exit(1)
 
+    print('Looking for HelmRelease and HelmRepository resources... ')
     try:
         get_releases(argv[1])
     except Exception as e:
@@ -136,7 +131,17 @@ if __name__ == '__main__':
         print('Warning: No HelmRelease files found')
         exit(0)
 
+    try:
+        mkdir(argv[2])
+    except FileExistsError:
+        pass
+    except Exception as e:
+        print('Error! Unable to create output directory')
+        print(e)
+        exit(1)
+
     for release in helm_releases:
+        print(f"Templating {release['original_file_path']}... ")
         try:
             api_ver = release['apiVersion']
             if api_ver.startswith('helm.toolkit.fluxcd.io'):
@@ -153,8 +158,3 @@ if __name__ == '__main__':
             print('Unexpected error while templating a release')
             print(e)
             exit(1)
-
-        print(
-            f"Successfully templated release {release['metadata']['name']}"
-            f" for namespace {release['metadata']['namespace']}"
-        )
