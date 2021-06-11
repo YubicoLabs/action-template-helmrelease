@@ -3,8 +3,8 @@
 from sys import argv, exit
 from os import mkdir, path
 import yaml
-import glob
 import subprocess
+import pathlib
 
 
 helm_releases = []
@@ -19,7 +19,7 @@ def check_args() -> None:
 
 
 def get_releases(path: str) -> None:
-    release_files = glob.glob(f"{argv[1]}/*.y*ml", recursive=True)
+    release_files = pathlib.Path(argv[1]).rglob('*.y*ml')
     for file in release_files:
         with open(file, 'r') as stream:
             yamls = yaml.safe_load_all(stream)
