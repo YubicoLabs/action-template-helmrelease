@@ -11,3 +11,6 @@ jobs:
       run: |
         pip3 install --user flake8
         flake8
+
+    - name: generate for test files
+      run: ./template_helmrelease.py .github/test_files generated

@@ -1,0 +1,16 @@
+apiVersion: helm.fluxcd.io/v1
+kind: HelmRelease
+metadata:
+  name: mysql
+  namespace: mysql-flux
+  annotations:
+    helm.fluxcd.io/migrate: "true"
+spec:
+  helmVersion: v3
+  releaseName: mysql
+  chart:
+    repository: https://charts.bitnami.com/bitnami
+    name: mysql
+    version: 8
+  values:
+    a: b
