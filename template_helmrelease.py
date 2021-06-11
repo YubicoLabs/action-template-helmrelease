@@ -100,7 +100,7 @@ def helm_template(cfg: dict) -> None:
         proc = subprocess.Popen([
             'helm', 'template', cfg['install_name'], cfg['chart_name'],
             '--repo', cfg['chart_repo_url'],
-            '--version', cfg['chart_version'],
+            '--version', str(cfg['chart_version']),
             '--namespace', cfg['install_namespace'],
             '--values', '-',
         ], stdin=subprocess.PIPE, stdout=out_file)
