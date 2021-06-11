@@ -94,13 +94,14 @@ def get_install_namespace_v2(release: dict) -> str:
 
 def helm_template(cfg: dict) -> None:
     out_file_name = path.join(
-        f"{argv[2]}",
-        (
-            f"{cfg['install_namespace']}_"
-            f"{cfg['install_name']}_"
-            f"{cfg['chart_name']}_"
-            f"{cfg['chart_version']}.yaml"
-        ),
+        argv[2],
+        "_".join([
+            cfg['install_namespace'],
+            cfg['install_namespace'],
+            cfg['install_name'],
+            cfg['chart_name'],
+            f"{cfg['chart_version']}.yaml",
+        ]),
     )
     with open(out_file_name, 'w') as out_file:
         proc = subprocess.Popen([

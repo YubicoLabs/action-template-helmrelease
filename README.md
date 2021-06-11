@@ -23,7 +23,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: template
-        uses: YubicoLabs/action-template-helmrelease@v1
+        uses: YubicoLabs/action-template-helmrelease@v2
         with:
           hr-path: your-helmrelease.yaml
 ```
