@@ -24,6 +24,8 @@ def get_releases(path: str) -> None:
         with open(file, 'r') as stream:
             yamls = yaml.safe_load_all(stream)
             for yaml_parsed in yamls:
+                if yaml_parsed is None:
+                    continue
                 if 'kind' not in yaml_parsed.keys():
                     continue
                 if yaml_parsed['kind'] == 'HelmRelease':
@@ -68,6 +70,8 @@ def lookup_repo_url(name: str) -> str:
     for repo in helm_repos:
         if repo['metadata']['name'] == name:
             return repo['spec']['url']
+
+    raise Exception(f"HelmRepository {name} not found, unable to obtain repo URL")
 
 
 def get_install_namespace_v1(release: dict) -> str:
