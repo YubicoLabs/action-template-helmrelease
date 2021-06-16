@@ -6,10 +6,11 @@ If a directory is specified for the `hr-path` option, it will be recursively sea
 
 ## Options
 
-| Option  | Description                                | Default | Required |
-|---------|--------------------------------------------|---------|----------|
-| hr-path | Path to the HelmRelease file or directory  |         | yes      |
-| out-dir | Path to the directory to write the outputs | .       | no       |
+| Option            | Description                                                          | Default | Required |
+|-------------------|----------------------------------------------------------------------|---------|----------|
+| hr-path           | Path to the HelmRelease file or directory                            |         | yes      |
+| out-dir           | Path to the directory to write the outputs                           | .       | no       |
+| continue-on-error | Whether to continue templating if an error occurrs with one template | false   | no       |
 
 ## Example Usage
 

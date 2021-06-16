@@ -117,6 +117,11 @@ def helm_template(cfg: dict) -> None:
             raise Exception('helm template command failed')
 
 
+def exitWithCode():
+    if argv[3].lower() != "true":
+        exit(1)
+
+
 if __name__ == '__main__':
     check_args()
 
@@ -154,8 +159,8 @@ if __name__ == '__main__':
         except KeyError as e:
             print('Error! One of the YAMLs is missing a required value')
             print(f"Key name: {e}")
-            exit(1)
+            exitWithCode()
         except Exception as e:
             print('Unexpected error while templating a release')
             print(e)
-            exit(1)
+            exitWithCode()
