@@ -1,0 +1,16 @@
+name: Pull Request
+on: [pull_request]
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: run flake8
+      run: |
+        pip3 install --user flake8
+        flake8
+
+    - name: generate for test files
+      run: ./template_helmrelease.py .github/test_files generated

@@ -11,9 +11,14 @@ inputs:
     description: "Path to the directory to write the outputs."
     required: true
     default: '.'
+  continue-on-error:
+    description: "Whether to continue templating if an error occurrs with one template"
+    required: true
+    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.hr-path }}
     - ${{ inputs.out-dir }}
+    - ${{ inputs.continue-on-error }}
